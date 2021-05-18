@@ -30,10 +30,10 @@ namespace MimicAPI
             services.AddControllers();
             services.AddDbContext<MimicContext>(opt =>
             {
-                opt.UseSqlite("Data Source=DataBase\\Mimic.db");
+                opt.UseSqlite("Data Source=DataBase\\Mimic.db");//cria o serviço pro banco de dados funcionar
             });
 
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc(options => options.EnableEndpointRouting = false);//cria o serviço pro padrão Mvc funcionar
 
         }
 
@@ -50,7 +50,8 @@ namespace MimicAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseMvc();
+            app.UseStatusCodePages();//para mostrar mensagens nas requisições
+            app.UseMvc(); //importante pra adicionar o Mvc no código
 
             app.UseHttpsRedirection();
 

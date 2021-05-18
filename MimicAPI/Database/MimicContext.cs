@@ -10,6 +10,7 @@ namespace MimicAPI.Database
 {
     public class MimicContext : DbContext
     {
+        //construtor do contexto do banco de dados
         public MimicContext(DbContextOptions<MimicContext> options) : base(options)
 
         {
