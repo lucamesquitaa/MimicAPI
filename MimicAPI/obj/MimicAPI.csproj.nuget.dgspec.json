@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USUARIO\\Desktop\\ASP .NET CORE WEBAPI\\Seção 01\\01_Inicio\\MimicAPI\\MimicAPI\\MimicAPI.csproj": {}
+    "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USUARIO\\Desktop\\ASP .NET CORE WEBAPI\\Seção 01\\01_Inicio\\MimicAPI\\MimicAPI\\MimicAPI.csproj": {
+    "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\Desktop\\ASP .NET CORE WEBAPI\\Seção 01\\01_Inicio\\MimicAPI\\MimicAPI\\MimicAPI.csproj",
+        "projectUniqueName": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj",
         "projectName": "MimicAPI",
-        "projectPath": "C:\\Users\\USUARIO\\Desktop\\ASP .NET CORE WEBAPI\\Seção 01\\01_Inicio\\MimicAPI\\MimicAPI\\MimicAPI.csproj",
-        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USUARIO\\Desktop\\ASP .NET CORE WEBAPI\\Seção 01\\01_Inicio\\MimicAPI\\MimicAPI\\obj\\",
+        "projectPath": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj",
+        "packagesPath": "C:\\Users\\luca.mesquita\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\luca.mesquita\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
