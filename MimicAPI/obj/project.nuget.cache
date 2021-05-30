@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mXiV1sOGqVdApgXdZuoRXK0prcDe/hkFyBsl1OUXGzzgmeptx2kuVSj0tEjO/yrOJy0lpts7xKYoUo0rfCirFg==",
+  "dgSpecHash": "5affUxgLa2FT/0JWmOPJCH7YCtuUaHlmu8IiUawCzkDnaDJQrX7UdfM4McT4lliDfXx2XdPeKGhkefZYjTbQAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj",
+  "projectFilePath": "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\MimicAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luca.mesquita\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\luca.mesquita\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj": {}
+    "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\MimicAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj": {
+    "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\MimicAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj",
+        "projectUniqueName": "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\MimicAPI.csproj",
         "projectName": "MimicAPI",
-        "projectPath": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\MimicAPI.csproj",
+        "projectPath": "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\MimicAPI.csproj",
         "packagesPath": "C:\\Users\\luca.mesquita\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luca.mesquita\\Desktop\\WebApi_clone\\MimicAPI\\obj\\",
+        "outputPath": "C:\\Users\\luca.mesquita\\Documents\\GitHub\\MimicAPI\\MimicAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\luca.mesquita\\AppData\\Roaming\\NuGet\\NuGet.Config",
