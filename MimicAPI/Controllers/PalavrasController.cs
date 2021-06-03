@@ -24,31 +24,31 @@ namespace MimicAPI.Controllers
         //app -- api/palavras (mostra a lista de palavras)
         [Route("")]
         [HttpGet]
-        public ActionResult ObterTodas(DateTime? data, int? pagNumero, int? pagRegistros)
+        public ActionResult ObterTodas([FromQuery] PalavraUrlQuery query)//puxa as propriedades de uma Query
         {
             //esse metodo pode funcionar de duas formas: recebendo o datetime como parametro ou não
             var item = _banco.Palavras.AsQueryable();
-            if (data.HasValue)
+            if (query.Data.HasValue)
             {
-                item = item.Where(a => a.Criado > data.Value|| a.Atualizado > data.Value);
+                item = item.Where(a => a.Criado > query.Data.Value || a.Atualizado > query.Data.Value);
             }
 
-            if (pagNumero.HasValue)
+            if (query.PagNumero.HasValue)
             {
                 var quantidadeTotalRegistros = item.Count();
                 //pula os proximos registros de uma página  e pega os próximos
                 //ex: tem 2 páginas e cada pagina tem 5 itens
                 //(2-1)*5 = pula 5 e pega os 5 próximos
-                item = item.Skip((pagNumero.Value - 1) * pagRegistros.Value).Take(pagRegistros.Value);
+                item = item.Skip((query.PagNumero.Value - 1) * query.PagRegistros.Value).Take(query.PagRegistros.Value);
                 var paginacao = new Paginacao();
-                paginacao.NumeroPagina = pagNumero.Value;
-                paginacao.RegistroPorPagina = pagRegistros.Value;
+                paginacao.NumeroPagina = query.PagNumero.Value;
+                paginacao.RegistroPorPagina = query.PagRegistros.Value;
                 paginacao.TotalRegistros = quantidadeTotalRegistros;
-                paginacao.TotalPaginas = (int) Math.Ceiling((double) quantidadeTotalRegistros/ pagRegistros.Value);
+                paginacao.TotalPaginas = (int)Math.Ceiling((double)quantidadeTotalRegistros / query.PagRegistros.Value);
 
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginacao));
 
-                if(pagNumero > paginacao.TotalPaginas)
+                if (query.PagNumero > paginacao.TotalPaginas)
                 {
                     return NotFound();
                 }
