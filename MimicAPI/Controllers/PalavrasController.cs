@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MimicAPI.Database;
 using MimicAPI.Helpers;
 using MimicAPI.Models;
+using MimicAPI.Models.DTO;
+using MimicAPI.Repositories.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,92 +17,74 @@ namespace MimicAPI.Controllers
     public class PalavrasController : ControllerBase
     {
 
-        private readonly MimicContext _banco;
-        public PalavrasController(MimicContext banco)
+        private readonly IPalavraRepository _repository;
+        private readonly IMapper _mapper;
+        public PalavrasController(IPalavraRepository repository, IMapper mapper)
         {
-            _banco = banco;
-
+            _repository = repository;
+            _mapper = mapper;
         }
         //app -- api/palavras (mostra a lista de palavras)
         [Route("")]
         [HttpGet]
-        public ActionResult ObterTodas([FromQuery] PalavraUrlQuery query)//puxa as propriedades de uma Query
+        public ActionResult ObterPalavras([FromQuery] PalavraUrlQuery query)//puxa as propriedades de uma Query
         {
-            //esse metodo pode funcionar de duas formas: recebendo o datetime como parametro ou não
-            var item = _banco.Palavras.AsQueryable();
-            if (query.Data.HasValue)
+            var item = _repository.ObterPalavras(query);
+            if (query.PagNumero > item.Paginacao.TotalPaginas)
             {
-                item = item.Where(a => a.Criado > query.Data.Value || a.Atualizado > query.Data.Value);
+                return NotFound();
             }
-
-            if (query.PagNumero.HasValue)
-            {
-                var quantidadeTotalRegistros = item.Count();
-                //pula os proximos registros de uma página  e pega os próximos
-                //ex: tem 2 páginas e cada pagina tem 5 itens
-                //(2-1)*5 = pula 5 e pega os 5 próximos
-                item = item.Skip((query.PagNumero.Value - 1) * query.PagRegistros.Value).Take(query.PagRegistros.Value);
-                var paginacao = new Paginacao();
-                paginacao.NumeroPagina = query.PagNumero.Value;
-                paginacao.RegistroPorPagina = query.PagRegistros.Value;
-                paginacao.TotalRegistros = quantidadeTotalRegistros;
-                paginacao.TotalPaginas = (int)Math.Ceiling((double)quantidadeTotalRegistros / query.PagRegistros.Value);
-
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginacao));
-
-                if (query.PagNumero > paginacao.TotalPaginas)
-                {
-                    return NotFound();
-                }
-            }
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(item.Paginacao));
             return Ok(item);
         }
         //recuperar uma palavra -- api/palavras/2 (mostra)
-        [Route("{id}")]
-        [HttpGet]
+        [HttpGet("{id}", Name = "ObterPalavra")]
         public ActionResult Obter(int id)
         {
-            var obj = _banco.Palavras.Find(id);
+            var obj = _repository.Obter(id);
             if (obj == null)
                 return NotFound(); //muda o retorno pra 404 ( erro )
 
-            return Ok();
+            PalavraDTO palavraDTO = _mapper.Map<Palavra, PalavraDTO>(obj);
+            palavraDTO.Links = new List<LinkDTO>();
+            palavraDTO.Links.Add(new LinkDTO("self", Url.Link("ObterPalavra", new { id = palavraDTO.Id }), "GET"));
+            palavraDTO.Links.Add(new LinkDTO("update", Url.Link("AtualizarPalavra", new { id = palavraDTO.Id }), "PUT"));
+            palavraDTO.Links.Add(new LinkDTO("delete", Url.Link("ExcluirPalavra", new { id = palavraDTO.Id }), "DELETE"));
+
+            return Ok(palavraDTO);
         }
         //cadastro de palavras -- api/palavras (post: dados)
         [Route("")]
         [HttpPost]
         public ActionResult Cadastrar([FromBody] Palavra palavra)
         {
-            _banco.Palavras.Add(palavra);
-            _banco.SaveChanges();
-            return Created($"api/palavras/{palavra.Id}",palavra);
+            _repository.Cadastrar(palavra);
+            return Created($"api/palavras/{palavra.Id}", palavra);
         }
         //modificar palavra -- api/palavras (put: dados)
-        [Route("{id}")]
-        [HttpPut]
+
+        [HttpPut("{id}", Name = "AtualizarPalavra")]
         public ActionResult Atualizar(int id, [FromBody] Palavra palavra)
         {
-            var obj = _banco.Palavras.AsNoTracking().FirstOrDefault(async=>async.Id == id);
+            var obj = _repository.Obter(id);
             if (obj == null)
                 return NotFound(); //muda o retorno pra 404 ( erro )
 
             palavra.Id = id;
-            _banco.Palavras.Update(palavra);
-            _banco.SaveChanges();
+            _repository.Atualizar(palavra);
             return Ok();
         }
         //deletar palavra -- api/palavras/2 (deleta)
-        [Route("{id}")]
-        [HttpDelete]
+       
+        [HttpDelete("{id}", Name = "ExcluirPalavra")]
         public ActionResult Deletar(int id)
         {
-            var palavra = _banco.Palavras.Find(id);
+            var palavra = _repository.Obter(id);
             if (palavra == null)
                 return NotFound(); //muda o retorno pra 404 ( erro )
 
-            palavra.Ativo = false;
-            _banco.Palavras.Update(palavra); //não exclui a palavra, apenas deixa ela "inativa" nas propriedades da palavra
-            _banco.SaveChanges();
+            _repository.Deletar(id);
+
             return NoContent();
         }
     }

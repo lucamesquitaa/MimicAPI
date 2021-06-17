@@ -378,3 +378,4 @@ C:\Users\luca.mesquita\Documents\GitHub\MimicAPI\MimicAPI\obj\Debug\net5.0\Mimic
 C:\Users\luca.mesquita\Documents\GitHub\MimicAPI\MimicAPI\obj\Debug\net5.0\ref\MimicAPI.dll
 C:\Users\luca.mesquita\Documents\GitHub\MimicAPI\MimicAPI\obj\Debug\net5.0\MimicAPI.pdb
 C:\Users\luca.mesquita\Documents\GitHub\MimicAPI\MimicAPI\obj\Debug\net5.0\MimicAPI.genruntimeconfig.cache
+C:\Users\luca.mesquita\Documents\GitHub\MimicAPI\MimicAPI\bin\Debug\net5.0\AutoMapper.dll

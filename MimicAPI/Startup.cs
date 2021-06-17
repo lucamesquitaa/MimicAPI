@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MimicAPI.Repositories;
+using MimicAPI.Repositories.Contracts;
+using AutoMapper;
+using MimicAPI.Helpers;
 
 namespace MimicAPI
 {
@@ -28,13 +32,23 @@ namespace MimicAPI
         {
             services.AddRazorPages();
             services.AddControllers();
+
+            #region AutoMapper-Config
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DTOMapperProfile());
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            #endregion
+
             services.AddDbContext<MimicContext>(opt =>
             {
                 opt.UseSqlite("Data Source=DataBase\\Mimic.db");//cria o serviço pro banco de dados funcionar
             });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);//cria o serviço pro padrão Mvc funcionar
-
+            services.AddScoped<IPalavraRepository, PalavraRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
